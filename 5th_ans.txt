@@ -1,0 +1,14 @@
+Ques:-5.Write a function to remove duplicate strings from an array of strings.
+Ans:-
+     public static void Main(string[] args)
+        {
+            string[] str = { "1", "2", "3", "4", "1", "2", "3", "4" };
+            string[] strArray = str.Distinct().ToArray();
+            foreach (string s in strArray)
+                Console.WriteLine(s);
+            Console.ReadLine();
+        }
+    
+
+
+

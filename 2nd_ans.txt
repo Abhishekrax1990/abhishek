@@ -1,0 +1,36 @@
+Ques:-2.Write a function which accepts an array of strings and returns a 
+map of character to count of the character
+(including spaces and special characters).
+
+Ans:-
+
+        public static void Main(string[] args)
+        {
+            string inputstring = "Hello World";
+
+            string[] input = { "Hello World", "Hello World" };
+            inputstring = String.Join(",", input).Replace(",", "");
+
+
+            var count = 0;
+            char key;
+
+            var charGroups = (from s in inputstring
+                              group s by s into g
+                              select new
+                              {
+                                  c = g.Key,
+                                  count = g.Count(),
+                              }).OrderBy(c => c.count);
+            foreach (var x in charGroups)
+            {
+                Console.WriteLine(x.c + ": " + x.count);
+                key = x.c;
+                count = x.count;
+            }
+           
+            Console.Read();
+        }
+    
+
+
