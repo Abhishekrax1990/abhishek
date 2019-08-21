@@ -1,0 +1,80 @@
+1.Ques:- Difference between ‘this’ and ‘let’ and when to use what, explain with examples.
+
+
+Ans:- 
+          :-"this" keyword
+:-"this" keyword is used for current instance of the class.
+:-"this" keyword is used to differentiate between the method parameters ans class fields.
+
+Example:-
+class Student {
+   public int Id;  
+   public String Name;
+
+   public Student(int id, String name) {
+      this.Id = id;
+      this.Name = name;
+      
+   }
+
+   public void showInfo() {
+      Console.WriteLine(Id + " " + Name);
+   }
+}
+
+class StudentDetails {
+   public static void Main(string[] args) {
+      Student std1 = new Student(001, "Jack");
+      Student std2 = new Student(002, "Harry");
+      Student std3 = new Student(003, "Steve");
+      Student std4 = new Student(004, "David");
+
+      std1.showInfo();
+      std2.showInfo();
+      std3.showInfo();
+      std4.showInfo();
+   }
+} 
+
+
+      :-Let keyword
+
+:-"let" keyword allows reuse of the expression.
+:-It makes the query more readable.
+Example:-
+
+public class Student{
+
+	public int StudentID { get; set; }
+	
+	public int Age { get; set; }
+}
+
+public class Program
+{
+	public static void Main()
+	{
+		List<Student> studentList = new List<Student>() { 
+            new Student() { StudentID = 1, Age = 13 } ,
+            new Student() { StudentID = 2,  Age = 15 } ,
+            new Student() { StudentID = 3,  Age = 18 } ,
+            new Student() { StudentID = 4, Age = 12 } ,
+            new Student() { StudentID = 5, Age = 21 } 
+        };
+            
+		var lowercaseStudentNames = from s in studentList
+                            let lowercaseStudentName = s.StudentName.ToLower()
+                                where lowercaseStudentName.StartsWith("r")
+                                select lowercaseStudentName;
+								
+		
+		
+		foreach (var name in lowercaseStudentNames)
+			Console.WriteLine(name);
+	}
+}
+
+
+
+
+
