@@ -1,0 +1,57 @@
+Ques:-write a function to return all the keys present in an object at any level.
+Ans:- 
+
+
+class Program
+    {
+        static void Main(string[] args)
+        {
+            var x = new Rootobject { a = "5", b = new B { c = new C { d = "10" } } };
+            var nested1 = GetPropertyValue(x, "a");
+            var nested2 = GetPropertyValue(x, "a.b");
+            var nested3 = GetPropertyValue(x, "b.c");
+            var nested4 = GetPropertyValue(x, "b.c.d");
+            Console.WriteLine("Output is {0},{1},{2}," + nested4, nested1, nested2, nested3);
+            Console.ReadLine();
+
+        }
+        public static object GetPropertyValue(object src, string propName)
+        {
+
+            if (src == null) throw new ArgumentException("Value cannot be null.", "src");
+            if (propName == null) throw new ArgumentException("Value cannot be null.", "propName");
+
+            if (propName.Contains("."))//complex type nested
+            {
+
+                var temp = propName.Split(new char[] { '.' }, 2);
+
+                return GetPropertyValue(GetPropertyValue(src, temp[0]), temp[1]);
+            }
+            else if (src.GetType().GetProperty(propName) == null)
+            {
+                return propName;
+            }
+            else
+            {
+                var prop = src.GetType().GetProperty(propName);
+                return prop.Name;
+            }
+
+        }
+
+    }
+
+    public class C
+    {
+        public string d { get; set; }
+    }
+    public class B
+    {
+        public C c { get; set; }
+    }
+    public class Rootobject
+    {
+        public string a { get; set; }
+        public B b { get; set; }
+    }
